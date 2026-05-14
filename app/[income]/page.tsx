@@ -15,7 +15,17 @@ export async function generateMetadata({ params }: Props) {
 
 export default async function SalaryPage({ params }: Props) {
   const { income } = await params
-  const annualIncome = Number(income.replace('k', '000'))
+ const annualIncome = parseInt(income)
+
+if (isNaN(annualIncome)) {
+  return (
+    <main className="p-10 text-center">
+      <h1 className="text-4xl font-bold">
+        Invalid Salary Page
+      </h1>
+    </main>
+  )
+}
 
   const tax = calculateTax(annualIncome)
   const medicare = annualIncome * 0.02
