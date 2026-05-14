@@ -133,6 +133,14 @@ export default function Page() {
           </section>
         </div>
       </div>
+      <footer className="mt-16 text-center text-sm text-slate-500 space-x-4">
+  <a href="/about">About</a>
+  <a href="/contact">Contact</a>
+  <a href="/privacy-policy">Privacy Policy</a>
+  <a href="/100000-after-tax-australia">
+    100k After Tax
+  </a>
+</footer>
     </main>
   )
 }
@@ -151,11 +159,3 @@ function Result({
     </div>
   )
 }
-<div className="mt-10 flex flex-wrap justify-center gap-4 text-sm text-slate-600">
-  <a href="/about" className="hover:text-blue-600">About</a>
-  <a href="/contact" className="hover:text-blue-600">Contact</a>
-  <a href="/privacy-policy" className="hover:text-blue-600">Privacy Policy</a>
-  <a href="/100000-after-tax-australia" className="hover:text-blue-600">
-    100k After Tax
-  </a>
-</div>
