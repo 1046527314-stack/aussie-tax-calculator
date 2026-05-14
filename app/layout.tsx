@@ -15,7 +15,7 @@ const geistMono = Geist_Mono({
 export const metadata: Metadata = {
   title: "Aussie Tax Mate",
   description:
-    "Australian tax calculator for salary, income tax, Medicare Levy and take-home pay.",
+    "Australian tax calculator for salary, tax and take-home pay.",
 };
 
 export default function RootLayout({
@@ -34,7 +34,7 @@ export default function RootLayout({
       </head>
 
       <body
-        className={`${geistSans.variable} ${geistMono.variable} min-h-screen`}
+        className={`${geistSans.variable} ${geistMono.variable}`}
       >
         {children}
       </body>
