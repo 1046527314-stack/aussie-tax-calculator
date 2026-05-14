@@ -1,31 +1,31 @@
 type Props = {
   params: {
-    income: string;
+    slug: string;
   };
 };
 
-function calculateTax(income: number) {
+function calculateTax(slug: number) {
   let tax = 0;
 
-  if (income <= 18200) {
+  if (slug <= 18200) {
     tax = 0;
-  } else if (income <= 45000) {
-    tax = (income - 18200) * 0.16;
-  } else if (income <= 135000) {
-    tax = 4288 + (income - 45000) * 0.30;
-  } else if (income <= 190000) {
-    tax = 31288 + (income - 135000) * 0.37;
+  } else if (slug <= 45000) {
+    tax = (slug - 18200) * 0.16;
+  } else if (slug <= 135000) {
+    tax = 4288 + (slug - 45000) * 0.30;
+  } else if (slug <= 190000) {
+    tax = 31288 + (slug - 135000) * 0.37;
   } else {
-    tax = 51638 + (income - 190000) * 0.45;
+    tax = 51638 + (slug - 190000) * 0.45;
   }
 
   return tax;
 }
 
 export default function SalaryPage({ params }: Props) {
-  const income = Number(params.income);
+  const slug = Number(params.slug);
 
-  if (isNaN(income)) {
+  if (isNaN(slug)) {
     return (
       <main className="min-h-screen flex items-center justify-center">
         <h1 className="text-5xl font-bold">
@@ -35,9 +35,9 @@ export default function SalaryPage({ params }: Props) {
     );
   }
 
-  const tax = calculateTax(income);
-  const medicare = income * 0.02;
-  const takeHome = income - tax - medicare;
+  const tax = calculateTax(slug);
+  const medicare = slug * 0.02;
+  const takeHome = slug - tax - medicare;
 
   const monthly = takeHome / 12;
   const weekly = takeHome / 52;
@@ -46,11 +46,11 @@ export default function SalaryPage({ params }: Props) {
     <main className="min-h-screen bg-slate-100 p-8">
       <div className="max-w-5xl mx-auto bg-white rounded-3xl shadow-xl p-10">
         <h1 className="text-5xl font-black mb-4">
-          ${income.toLocaleString()} After Tax Australia
+          ${slug.toLocaleString()} After Tax Australia
         </h1>
 
         <p className="text-slate-600 text-lg mb-10">
-          If you earn ${income.toLocaleString()} per year in Australia,
+          If you earn ${slug.toLocaleString()} per year in Australia,
           your estimated take-home pay after tax is approximately
           ${takeHome.toLocaleString(undefined, {
             maximumFractionDigits: 0,
@@ -59,12 +59,12 @@ export default function SalaryPage({ params }: Props) {
 
         <div className="grid md:grid-cols-2 gap-6">
           <Card
-            title="Gross Income"
-            value={`$${income.toLocaleString()}`}
+            title="Gross slug"
+            value={`$${slug.toLocaleString()}`}
           />
 
           <Card
-            title="Income Tax"
+            title="slug Tax"
             value={`$${tax.toLocaleString(undefined, {
               maximumFractionDigits: 0,
             })}`}
@@ -105,13 +105,13 @@ export default function SalaryPage({ params }: Props) {
           </h2>
 
           <p>
-            An annual salary of ${income.toLocaleString()} in Australia
-            falls into a common income range for skilled workers,
+            An annual salary of ${slug.toLocaleString()} in Australia
+            falls into a common slug range for skilled workers,
             professionals, tradespeople, and office employees.
           </p>
 
           <p>
-            Your estimated income tax is around
+            Your estimated slug tax is around
             {" "}
             ${tax.toLocaleString(undefined, {
               maximumFractionDigits: 0,
