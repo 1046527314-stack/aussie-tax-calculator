@@ -151,3 +151,11 @@ function Result({
     </div>
   )
 }
+<div className="mt-10 flex flex-wrap justify-center gap-4 text-sm text-slate-600">
+  <a href="/about" className="hover:text-blue-600">About</a>
+  <a href="/contact" className="hover:text-blue-600">Contact</a>
+  <a href="/privacy-policy" className="hover:text-blue-600">Privacy Policy</a>
+  <a href="/100000-after-tax-australia" className="hover:text-blue-600">
+    100k After Tax
+  </a>
+</div>
