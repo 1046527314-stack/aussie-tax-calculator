@@ -13,8 +13,9 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: 'Australian Tax Calculator 2026 | Aussie Tax Mate',
-  description: 'Calculate your Australian after-tax salary, HECS, Medicare Levy and Superannuation instantly.',
+  title: "Aussie Tax Mate",
+  description:
+    "Australian tax calculator for salary, income tax, Medicare Levy and take-home pay.",
 };
 
 export default function RootLayout({
@@ -25,16 +26,18 @@ export default function RootLayout({
   return (
     <html lang="en">
       <head>
-
         <script
           async
           src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4659587674577845"
           crossOrigin="anonymous"
         ></script>
-
       </head>
 
-      <body>
+      <body
+        className={`${geistSans.variable} ${geistMono.variable} min-h-screen`}
+      >
         {children}
       </body>
     </html>
+  );
+}
