@@ -1,15 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <url><loc>https://aussietaxmate.com/</loc></url>
-  <url><loc>https://aussietaxmate.com/about</loc></url>
-  <url><loc>https://aussietaxmate.com/contact</loc></url>
-  <url><loc>https://aussietaxmate.com/privacy-policy</loc></url>
-  <url><loc>https://aussietaxmate.com/50000-after-tax-australia</loc></url>
-  <url><loc>https://aussietaxmate.com/60000-after-tax-australia</loc></url>
-  <url><loc>https://aussietaxmate.com/70000-after-tax-australia</loc></url>
-  <url><loc>https://aussietaxmate.com/80000-after-tax-australia</loc></url>
-  <url><loc>https://aussietaxmate.com/90000-after-tax-australia</loc></url>
-  <url><loc>https://aussietaxmate.com/100000-after-tax-australia</loc></url>
-  <url><loc>https://aussietaxmate.com/120000-after-tax-australia</loc></url>
-  <url><loc>https://aussietaxmate.com/150000-after-tax-australia</loc></url>
+
+<url>
+<loc>https://aussietaxmate.com</loc>
+</url>
+
+<url>
+<loc>https://aussietaxmate.com/50000-after-tax-australia</loc>
+</url>
+
+<url>
+<loc>https://aussietaxmate.com/70000-after-tax-australia</loc>
+</url>
+
+<url>
+<loc>https://aussietaxmate.com/100000-after-tax-australia</loc>
+</url>
+
 </urlset>
