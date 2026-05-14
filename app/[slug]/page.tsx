@@ -8,6 +8,15 @@ export default async function Page({ params }: PageProps) {
   const { slug } = await params;
 
   const income = Number(slug.split("-")[0]);
+  if (isNaN(salary)) {
+  return (
+    <main className="min-h-screen flex items-center justify-center">
+      <h1 className="text-5xl font-bold">
+        Invalid Salary Page
+      </h1>
+    </main>
+  )
+}
 
   if (isNaN(income)) {
     return (
