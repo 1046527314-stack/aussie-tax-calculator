@@ -1,4 +1,3 @@
-page.tsx
 type Props = {
   params: {
     income: string
