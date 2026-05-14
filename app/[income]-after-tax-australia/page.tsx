@@ -1,153 +1,157 @@
 type Props = {
-  params: Promise<{
-    income: string
-  }>
-}
+  params: {
+    income: string;
+  };
+};
 
-export async function generateMetadata({ params }: Props) {
-  const { income } = await params
+function calculateTax(income: number) {
+  let tax = 0;
 
-  return {
-    title: `${income} After Tax Australia | Aussie Tax Mate`,
-    description: `Calculate ${income} after tax salary in Australia.`,
+  if (income <= 18200) {
+    tax = 0;
+  } else if (income <= 45000) {
+    tax = (income - 18200) * 0.16;
+  } else if (income <= 135000) {
+    tax = 4288 + (income - 45000) * 0.30;
+  } else if (income <= 190000) {
+    tax = 31288 + (income - 135000) * 0.37;
+  } else {
+    tax = 51638 + (income - 190000) * 0.45;
   }
+
+  return tax;
 }
 
-export default async function SalaryPage({ params }: Props) {
-  const { income } = await params
+export default function SalaryPage({ params }: Props) {
+  const income = Number(params.income);
 
-  const annualIncome = parseInt(income)
-
-  if (isNaN(annualIncome)) {
+  if (isNaN(income)) {
     return (
-      <main className="p-10 text-center">
-        <h1 className="text-4xl font-bold">
+      <main className="min-h-screen flex items-center justify-center">
+        <h1 className="text-5xl font-bold">
           Invalid Salary Page
         </h1>
       </main>
-    )
+    );
   }
 
-  const tax = calculateTax(annualIncome)
-  const medicare = annualIncome * 0.02
-  const net = annualIncome - tax - medicare
+  const tax = calculateTax(income);
+  const medicare = income * 0.02;
+  const takeHome = income - tax - medicare;
 
-  const monthly = net / 12
-  const fortnightly = net / 26
-  const weekly = net / 52
-
-  const money = (n: number) =>
-    new Intl.NumberFormat('en-AU', {
-      style: 'currency',
-      currency: 'AUD',
-      maximumFractionDigits: 0,
-    }).format(n)
+  const monthly = takeHome / 12;
+  const weekly = takeHome / 52;
 
   return (
-    <main className="min-h-screen bg-slate-50 p-6">
-      <div className="mx-auto max-w-5xl">
-        <div className="rounded-3xl bg-white p-10 shadow-xl">
+    <main className="min-h-screen bg-slate-100 p-8">
+      <div className="max-w-5xl mx-auto bg-white rounded-3xl shadow-xl p-10">
+        <h1 className="text-5xl font-black mb-4">
+          ${income.toLocaleString()} After Tax Australia
+        </h1>
 
-          <div className="mb-10">
-            <h1 className="text-5xl font-black mb-4">
-              {income} After Tax Australia
-            </h1>
+        <p className="text-slate-600 text-lg mb-10">
+          If you earn ${income.toLocaleString()} per year in Australia,
+          your estimated take-home pay after tax is approximately
+          ${takeHome.toLocaleString(undefined, {
+            maximumFractionDigits: 0,
+          })}.
+        </p>
 
-            <p className="text-slate-600 text-lg">
-              Calculate how much you take home earning {money(annualIncome)} per year in Australia.
-            </p>
-          </div>
+        <div className="grid md:grid-cols-2 gap-6">
+          <Card
+            title="Gross Income"
+            value={`$${income.toLocaleString()}`}
+          />
 
-          <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-4 mb-12">
-            <Card title="Gross Income" value={money(annualIncome)} />
-            <Card title="Income Tax" value={money(tax)} />
-            <Card title="Medicare Levy" value={money(medicare)} />
-            <Card title="Take Home Pay" value={money(net)} />
-          </div>
+          <Card
+            title="Income Tax"
+            value={`$${tax.toLocaleString(undefined, {
+              maximumFractionDigits: 0,
+            })}`}
+          />
 
-          <div className="grid gap-6 md:grid-cols-3 mb-12">
-            <Card title="Monthly Pay" value={money(monthly)} />
-            <Card title="Fortnightly Pay" value={money(fortnightly)} />
-            <Card title="Weekly Pay" value={money(weekly)} />
-          </div>
+          <Card
+            title="Medicare Levy"
+            value={`$${medicare.toLocaleString(undefined, {
+              maximumFractionDigits: 0,
+            })}`}
+          />
 
-          <div className="prose max-w-none">
-            <h2>
-              How much is {income} after tax in Australia?
-            </h2>
+          <Card
+            title="Take Home Pay"
+            value={`$${takeHome.toLocaleString(undefined, {
+              maximumFractionDigits: 0,
+            })}`}
+          />
 
-            <p>
-              If you earn {money(annualIncome)} per year in Australia,
-              your estimated take-home pay is {money(net)}
-              after income tax and Medicare Levy.
-            </p>
+          <Card
+            title="Monthly Take Home"
+            value={`$${monthly.toLocaleString(undefined, {
+              maximumFractionDigits: 0,
+            })}`}
+          />
 
-            <p>
-              Your estimated monthly salary after tax is {money(monthly)},
-              fortnightly pay is {money(fortnightly)},
-              and weekly take-home pay is {money(weekly)}.
-            </p>
+          <Card
+            title="Weekly Take Home"
+            value={`$${weekly.toLocaleString(undefined, {
+              maximumFractionDigits: 0,
+            })}`}
+          />
+        </div>
 
-            <p>
-              This estimate is based on Australian resident tax rates
-              and does not include deductions, offsets, or HECS repayments.
-            </p>
+        <div className="mt-12 space-y-6 text-slate-700 leading-8">
+          <h2 className="text-3xl font-bold">
+            Salary Breakdown
+          </h2>
 
-            <h2>
-              Related Salary Pages
-            </h2>
+          <p>
+            An annual salary of ${income.toLocaleString()} in Australia
+            falls into a common income range for skilled workers,
+            professionals, tradespeople, and office employees.
+          </p>
 
-            <ul>
-              <li>
-                <a href="/80000-after-tax-australia">
-                  80000 After Tax Australia
-                </a>
-              </li>
+          <p>
+            Your estimated income tax is around
+            {" "}
+            ${tax.toLocaleString(undefined, {
+              maximumFractionDigits: 0,
+            })}
+            , plus Medicare Levy.
+          </p>
 
-              <li>
-                <a href="/100000-after-tax-australia">
-                  100000 After Tax Australia
-                </a>
-              </li>
+          <p>
+            Your estimated weekly take-home pay is around
+            {" "}
+            ${weekly.toLocaleString(undefined, {
+              maximumFractionDigits: 0,
+            })}
+            .
+          </p>
 
-              <li>
-                <a href="/120000-after-tax-australia">
-                  120000 After Tax Australia
-                </a>
-              </li>
-            </ul>
-          </div>
-
+          <p>
+            This calculator is intended for Australian residents and
+            provides a general estimate only.
+          </p>
         </div>
       </div>
     </main>
-  )
-}
-
-function calculateTax(income: number) {
-  if (income <= 18200) return 0
-  if (income <= 45000) return (income - 18200) * 0.16
-  if (income <= 135000) return 4288 + (income - 45000) * 0.3
-  if (income <= 190000) return 31288 + (income - 135000) * 0.37
-  return 51638 + (income - 190000) * 0.45
+  );
 }
 
 function Card({
   title,
   value,
 }: {
-  title: string
-  value: string
+  title: string;
+  value: string;
 }) {
   return (
-    <div className="rounded-2xl border p-6 bg-white">
-      <p className="text-slate-500 mb-2">
-        {title}
-      </p>
+    <div className="rounded-2xl border p-6">
+      <p className="text-slate-500">{title}</p>
 
-      <h3 className="text-3xl font-bold">
+      <h3 className="text-3xl font-bold mt-2">
         {value}
       </h3>
     </div>
-  )
+  );
 }
